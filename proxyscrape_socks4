@@ -1,0 +1,10 @@
+import requests
+
+url_proxy_socks4 = 'https://api.proxyscrape.com/v2/?request=getproxies&protocol=socks4&timeout=10000&country=all'
+
+response = requests.get(url_proxy_socks4)
+
+with open('proxy_scrape_socks4.txt', 'wb') as f:
+    f.write(response.content)
+
+print("Status: True | Lấy Proxy Từ Github Thành Công! | Loại Proxy: Socks4 | File Lưu: proxy_scrape_socks4.txt")
