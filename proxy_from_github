@@ -1,0 +1,23 @@
+import requests
+from bs4 import BeautifulSoup
+
+url_proxy_github = 'https://github.com/mertguvencli/http-proxy-list/blob/main/proxy-list/data.txt'
+
+response = requests.get(url_proxy_github)
+soup = BeautifulSoup(response.text, 'html.parser')
+
+proxy_list = []
+
+for tr in soup.find_all('tr'):
+    td_list = tr.find_all('td')
+    if len(td_list) > 1:
+        ip = td_list[0].text.strip()
+        port = td_list[1].text.strip()
+        proxy = f"{ip}:{port}"
+        proxy_list.append(proxy)
+
+with open('proxy_unknown_unverified.txt', 'w') as f:
+    for proxy in proxy_list:
+        proxy = proxy[1:]
+        f.write(proxy + '\n')
+print("Status: True | Lấy Proxy Từ Github Thành Công! | Loại Proxy: UNKNOWN | File Lưu: proxy_unknown_unverified.txt")
