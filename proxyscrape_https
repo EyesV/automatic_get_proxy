@@ -1,0 +1,10 @@
+import requests
+
+url_proxy_https = 'https://api.proxyscrape.com/v2/?request=getproxies&protocol=http&timeout=10000&country=all&ssl=all&anonymity=all'
+
+response = requests.get(url_proxy_https)
+
+with open('proxy_scrape_http.txt', 'wb') as f:
+    f.write(response.content)
+
+print("Status: True | Lấy Proxy Từ Github Thành Công! | Loại Proxy: HTTPS | File Lưu: proxy_scrape_http.txt")
